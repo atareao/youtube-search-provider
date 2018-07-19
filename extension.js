@@ -1,20 +1,19 @@
 /*
- * WordReference Search Provider
- * An extension to search definitions and synonyms in WordReference
- * with GNOME Shell
+ * YouTube Search Provider
+ * An extension to search videos in YouTube with GNOME Shell
  *
  * Copyright (C) 2018
  *     Lorenzo Carbonell <lorenzo.carbonell.cerezo@gmail.com>,
  * https://www.atareao.es
  *
- * This file is part of WordReference Search Provider
+ * This file is part of YouTube Search Provider
  * 
- * WordReference Search Provider is free software: you can redistribute it and/or modify
+ * YouTube Search Provider is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * WordReference Search Provider is distributed in the hope that it will be useful,
+ * YouTube Search Provider is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -24,24 +23,23 @@
  * If not, see <http://www.gnu.org/licenses/>.
   */
 
-// To debug: log('blah');
-// And run: journalctl /usr/bin/gnome-session -f -o cat | grep LOG
 const St = imports.gi.St;
 const Main = imports.ui.main;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const GLib = imports.gi.GLib;
 const Clutter = imports.gi.Clutter;
+const GdkPixbuf = imports.gi.GdkPixbuf;
 const Util = imports.misc.util;
 
 const Extension = imports.misc.extensionUtils.getCurrentExtension();
-const WordReferenceClient = Extension.imports.wordreference_client;
+const YouTubeClient = Extension.imports.youtube_client;
 const Convenience = Extension.imports.convenience;
 
 const Gettext = imports.gettext.domain(Extension.metadata.uuid);
 const _ = Gettext.gettext;
 
-class WordReferenceSearchProvider{
+class YouTubeSearchProvider{
     constructor(){
 
         //this._settings = Convenience.getSettings();
@@ -52,32 +50,31 @@ class WordReferenceSearchProvider{
         this.appInfo = Gio.AppInfo.get_default_for_uri_scheme('https');
         // Fake the name and icon of the app
         this.appInfo.get_name = ()=>{
-            return 'WordReference Search Provider';
+            return 'YouTube Search Provider';
         };
         this.appInfo.get_icon = ()=>{
-            return new Gio.ThemedIcon({name: "dictionary"});
-            //return Gio.icon_new_for_string(Extension.path + "/dictionary.svg");
+            return new Gio.ThemedIcon({name: "youtube"});
         };
 
         // Custom messages that will be shown as search results
         this._messages = {
             '__loading__': {
                 id: '__loading__',
-                name: _('WordReference'),
-                description : _('Loading items from WordReference, please wait...'),
+                name: _('YouTube'),
+                description : _('Loading items from YouTube, please wait...'),
                 // TODO: do these kinds of icon creations better
                 createIcon: this.createIcon
             },
             '__error__': {
                 id: '__error__',
-                name: _('WordReference'),
+                name: _('YouTube'),
                 description : _('Oops, an error occurred while searching.'),
                 createIcon: this.createIcon
             }
         };
         // API results will be stored here
         this.resultsMap = new Map();
-        this._api = new WordReferenceClient.WordReferenceClient();
+        this._api = new YouTubeClient.YouTubeClient();
         // Wait before making an API request
         this._timeoutId = 0;
 
@@ -102,12 +99,49 @@ class WordReferenceSearchProvider{
      */
     activateResult(identifier, terms, timestamp) {
         let result;
+        let command = '';
         // only do something if the result is not a custom message
         if (!(identifier in this._messages)) {
             result = this.resultsMap.get(identifier);
             if (result) {
-                Util.trySpawnCommandLine(
-                    "xdg-open " + result.url);
+                let settings = Convenience.getSettings();
+                let viewer = settings.get_enum('viewer');
+                switch(viewer) {
+                    case 0:
+                        if(Gio.File.new_for_path('/usr/bin/vlc').query_exists(null)){
+                            command = '/usr/bin/vlc --one-instance "https://www.youtube.com/watch?v=%s"';
+                        }
+                        break;
+                    case 1:
+                        if(Gio.File.new_for_path('/usr/bin/minitube').query_exists(null)){
+                            command = '/usr/bin/minitube "https://www.youtube.com/watch?v=%s"';
+                        }
+                        break;
+                    case 2:
+                        if(Gio.File.new_for_path('/usr/bin/smplayer').query_exists(null)){
+                            command = '/usr/bin/smplayer "https://www.youtube.com/watch?v=%s"';
+                        }
+                        break;
+                    case 3:
+                        if(Gio.File.new_for_path('/usr/bin/umplayer').query_exists(null)){
+                            command = '/usr/bin/umplayer "https://www.youtube.com/watch?v=%s"';
+                        }
+                        break;
+                    case 4:
+                        if(Gio.File.new_for_path('/usr/bin/totem').query_exists(null)){
+                            command = '/usr/bin/totem "https://www.youtube.com/watch?v=%s"';
+                        }
+                        break;
+                    case 5:
+                        if(Gio.File.new_for_path('/usr/bin/miro').query_exists(null)){
+                            command = '/usr/bin/miro "https://www.youtube.com/watch?v=%s"';
+                        }
+                        break;
+                }
+                if(command == ''){
+                    command = 'xdg-open https://www.youtube.com/watch?v=%s';
+                }
+                Util.trySpawnCommandLine(command.format(result.url));
             }
         }
     }
@@ -118,6 +152,7 @@ class WordReferenceSearchProvider{
      */
     getResultMetas(identifiers, callback) {
         let metas = [];
+
         for (let i = 0; i < identifiers.length; i++) {
             let result;
             // return predefined message if it exists
@@ -129,9 +164,27 @@ class WordReferenceSearchProvider{
                 if (meta){
                     metas.push({
                         id: meta.id,
-                        name: meta.description,
-                        //description : meta.description,
-                        createIcon: this.createIcon
+                        name: meta.label,
+                        description : meta.description,
+                        createIcon: (size)=>{
+                            let box = new Clutter.Box();
+                            /*
+                            let icon = new St.Icon({gicon: new Gio.ThemedIcon({name: 'youtube'}),
+                                                    icon_size: size});
+                            box.add_child(icon);
+                            */
+                            let scale_factor = St.ThemeContext.get_for_stage(global.stage).scale_factor;
+                            let image_file = Gio.file_new_for_uri( meta.thumbnail_url);
+                            let texture_cache = St.TextureCache.get_default();
+                            let icon = texture_cache.load_file_async(
+                                image_file,
+                                meta.thumbnail_width,
+                                meta.thumbnail_height,
+                                scale_factor
+                            );
+                            box.add_child(icon);
+                            return box;
+                        }
                     });
                 }
             }
@@ -152,7 +205,7 @@ class WordReferenceSearchProvider{
         // It can be of the form 'wd', 'wd-en', 'wd-ru'. The part after
         // the dash is the search language.
 
-        if (terms != null && terms.length >= 1 && (terms[0].substring(0, 2) === 'd:' || terms[0].substring(0, 2) === 's:')) {
+        if (terms != null && terms.length >= 1) {
             // show the loading message
             this.showMessage('__loading__', callback);
             // remove previous timeout
@@ -160,7 +213,7 @@ class WordReferenceSearchProvider{
                 GLib.source_remove(this._timeoutId);
                 this._timeoutId = 0;
             }
-            this._timeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 800, () => {
+            this._timeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 1500, () => {
                 // now search
                 this._api.get(
                     this._getQuery(terms.join(' ')),
@@ -246,33 +299,33 @@ class WordReferenceSearchProvider{
      */
     createIcon(size) {
         let box = new Clutter.Box();
-        let icon = new St.Icon({gicon: new Gio.ThemedIcon({name: 'dictionary'}),
+        let icon = new St.Icon({gicon: new Gio.ThemedIcon({name: 'youtube'}),
                                 icon_size: size});
         box.add_child(icon);
         return box;
     }
 }
 
-let wordReferenceSearchProvider = null;
+let youTubeSearchProvider = null;
 
 function init() {
     Convenience.initTranslations();
 }
 
 function enable() {
-    if (!wordReferenceSearchProvider) {
-        wordReferenceSearchProvider = new WordReferenceSearchProvider();
+    if (!youTubeSearchProvider) {
+        youTubeSearchProvider = new YouTubeSearchProvider();
         Main.overview.viewSelector._searchResults._registerProvider(
-            wordReferenceSearchProvider
+            youTubeSearchProvider
         );
     }
 }
 
 function disable() {
-    if (wordReferenceSearchProvider){
+    if (youTubeSearchProvider){
         Main.overview.viewSelector._searchResults._unregisterProvider(
-            wordReferenceSearchProvider
+            youTubeSearchProvider
         );
-        wordReferenceSearchProvider = null;
+        youTubeSearchProvider = null;
     }
 }

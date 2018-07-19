@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="youtube-search-provider@atareao.es">
+    <enum id="es.atareao.youtube-search-provider.order">
+        <value value="0" nick="date"/>
+        <value value="1" nick="rating"/>
+        <value value="2" nick="title"/>
+        <value value="3" nick="videoCount"/>
+        <value value="4" nick="viewCount"/>
+    </enum>
+    <enum id="es.atareao.youtube-search-provider.time">
+        <value value="0" nick="last_24_hours"/>
+        <value value="1" nick="last_7_days"/>
+        <value value="2" nick="last_30_days"/>
+        <value value="3" nick="last_1_year"/>
+        <value value="4" nick="all_time"/>
+    </enum>
+    <enum id="es.atareao.youtube-search-provider.safesearch">
+        <value value="0" nick="moderate"/>
+        <value value="1" nick="none"/>
+        <value value="2" nick="strict"/>
+    </enum>
+    <enum id="es.atareao.youtube-search-provider.videocaption">
+        <value value="0" nick="any"/>
+        <value value="1" nick="closedCaption"/>
+        <value value="2" nick="none"/>
+    </enum>
+    <enum id="es.atareao.youtube-search-provider.videodefinition">
+        <value value="0" nick="any"/>
+        <value value="1" nick="high"/>
+        <value value="2" nick="standard"/>
+    </enum>
+    <enum id="es.atareao.youtube-search-provider.videodimension">
+        <value value="0" nick="2d"/>
+        <value value="1" nick="3d"/>
+        <value value="2" nick="any"/>
+    </enum>
+    <enum id="es.atareao.youtube-search-provider.videoduration">
+        <value value="0" nick="any"/>
+        <value value="1" nick="long"/>
+        <value value="2" nick="medium"/>
+        <value value="3" nick="short"/>
+    </enum>
+    <enum id="es.atareao.youtube-search-provider.videolicense">
+        <value value="0" nick="any"/>
+        <value value="1" nick="creativeCommon"/>
+        <value value="2" nick="youtube"/>
+    </enum>
+    <enum id="es.atareao.youtube-search-provider.videotype">
+        <value value="0" nick="any"/>
+        <value value="1" nick="episode"/>
+        <value value="2" nick="movie"/>
+    </enum>
+    <enum id="es.atareao.youtube-search-provider.viewer">
+        <value value="0" nick="vlc"/>
+        <value value="1" nick="minitube"/>
+        <value value="2" nick="smplayer"/>
+        <value value="3" nick="umplayer"/>
+        <value value="4" nick="totem"/>
+        <value value="5" nick="miro"/>
+    </enum>
+    <schema path="/es/atareao/youtube-search-provider/" id="es.atareao.youtube-search-provider">
+        <key name="order" enum="es.atareao.youtube-search-provider.order">
+            <default>'viewCount'</default>
+            <summary>Order</summary>
+            <description>The method that will be used to order the results</description>
+        </key>
+        <key name="time" enum="es.atareao.youtube-search-provider.time">
+            <default>'all_time'</default>
+            <summary>Time</summary>
+        </key>
+        <key name="safesearch" enum="es.atareao.youtube-search-provider.safesearch">
+            <default>'none'</default>
+            <summary>Safe search</summary>
+            <description>It indicates whether the search results should include restricted content as well as standard content</description>
+        </key>
+        <key name="videocaption" enum="es.atareao.youtube-search-provider.videocaption">
+            <default>'any'</default>
+            <summary>Video caption</summary>
+            <description>It indicates whether should filter video search results based on whether they have captions</description>
+        </key>
+        <key name="videodefinition" enum="es.atareao.youtube-search-provider.videodefinition">
+            <default>'any'</default>
+            <summary>Video definition</summary>
+            <description>It lets you restrict a search to only include either high definition (HD) or standard definition (SD) videos. HD videos are available for playback in at least 720p, though higher resolutions, like 1080p, might also be available</description>
+        </key>
+        <key name="videodimension" enum="es.atareao.youtube-search-provider.videodimension">
+            <default>'any'</default>
+            <summary>Video dimension</summary>
+            <description>It lets you restrict a search to only retrieve 2D or 3D videos</description>
+        </key>
+        <key name="videoduration" enum="es.atareao.youtube-search-provider.videoduration">
+            <default>'any'</default>
+            <summary>Video duration</summary>
+            <description>It filters video search results based on their duration</description>
+        </key>
+        <key name="videolicense" enum="es.atareao.youtube-search-provider.videolicense">
+            <default>'any'</default>
+            <summary>Video license</summary>
+            <description>It filters search results to only include videos with a particular license</description>
+        </key>
+        <key name="videotype" enum="es.atareao.youtube-search-provider.videotype">
+            <default>'any'</default>
+            <summary>Video type</summary>
+            <description>It lets you restrict a search to a particular type of videos</description>
+        </key>
+        <key name="max-results" type="i">
+            <default>5</default>
+            <summary>Maximum results</summary>
+            <description>Maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive</description>
+        </key>
+        <key name="viewer" enum="es.atareao.youtube-search-provider.viewer">
+            <default>'vlc'</default>
+            <summary>YouTube viewer</summary>
+            <description>Set YouTube viewer</description>
+        </key>
+    </schema>
+</schemalist>

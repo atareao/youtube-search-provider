@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-10 18:56+0200\n"
+"POT-Creation-Date: 2018-07-19 11:15+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,104 +17,194 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: schemas/es.atareao.wordreference-search-provider.gschema.xml:17
-msgid "Dictionary"
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:64
+msgid "Order"
 msgstr ""
 
-#: schemas/es.atareao.wordreference-search-provider.gschema.xml:21
-msgid "Synonyms"
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:65
+msgid "The method that will be used to order the results"
 msgstr ""
 
-#: extension.js:66 extension.js:73
-msgid "WordReference"
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:69
+msgid "Time"
 msgstr ""
 
-#: extension.js:67
-msgid "Loading items from WordReference, please wait..."
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:73
+msgid "Safe search"
 msgstr ""
 
-#: extension.js:74
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:74
+msgid ""
+"It indicates whether the search results should include restricted content as "
+"well as standard content"
+msgstr ""
+
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:78
+msgid "Video caption"
+msgstr ""
+
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:79
+msgid ""
+"It indicates whether should filter video search results based on whether "
+"they have captions"
+msgstr ""
+
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:83
+msgid "Video definition"
+msgstr ""
+
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:84
+msgid ""
+"It lets you restrict a search to only include either high definition (HD) or "
+"standard definition (SD) videos. HD videos are available for playback in at "
+"least 720p, though higher resolutions, like 1080p, might also be available"
+msgstr ""
+
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:88
+msgid "Video dimension"
+msgstr ""
+
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:89
+msgid "It lets you restrict a search to only retrieve 2D or 3D videos"
+msgstr ""
+
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:93
+msgid "Video duration"
+msgstr ""
+
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:94
+msgid "It filters video search results based on their duration"
+msgstr ""
+
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:98
+msgid "Video license"
+msgstr ""
+
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:99
+msgid ""
+"It filters search results to only include videos with a particular license"
+msgstr ""
+
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:103
+msgid "Video type"
+msgstr ""
+
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:104
+msgid "It lets you restrict a search to a particular type of videos"
+msgstr ""
+
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:108
+msgid "Maximum results"
+msgstr ""
+
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:109
+msgid ""
+"Maximum number of items that should be returned in the result set. "
+"Acceptable values are 0 to 50, inclusive"
+msgstr ""
+
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:113
+msgid "YouTube viewer"
+msgstr ""
+
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:114
+msgid "Set YouTube viewer"
+msgstr ""
+
+#: extension.js:63 extension.js:70
+msgid "YouTube"
+msgstr ""
+
+#: extension.js:64
+msgid "Loading items from YouTube, please wait..."
+msgstr ""
+
+#: extension.js:71
 msgid "Oops, an error occurred while searching."
 msgstr ""
 
-#: preferenceswidget.js:169
+#: preferenceswidget.js:168
 msgid "Nothing"
 msgstr ""
 
-#: preferenceswidget.js:182
+#: preferenceswidget.js:181
 msgid "True"
 msgstr ""
 
-#: preferenceswidget.js:195
+#: preferenceswidget.js:194
 msgid "False"
 msgstr ""
 
-#: prefs.js:61
-msgid "WordReference Search Provider"
+#: prefs.js:60
+msgid "YouTube Search Provider"
 msgstr ""
 
-#: prefs.js:66
+#: prefs.js:65
 msgid "Version: "
 msgstr ""
 
-#: prefs.js:77
+#: prefs.js:76
 msgid "Atareao"
 msgstr ""
 
-#: prefs.js:84
+#: prefs.js:83
 msgid "Copyright © 2018 Lorenzo Carbonell"
 msgstr ""
 
-#: prefs.js:91
+#: prefs.js:90
 msgid "This program is free software: you can redistribute it and/or modify"
 msgstr ""
 
-#: prefs.js:92
+#: prefs.js:91
 msgid "it under the terms of the GNU General Public License as published by"
 msgstr ""
 
-#: prefs.js:93
+#: prefs.js:92
 msgid "the Free Software Foundation, either version 3 of the License, or"
 msgstr ""
 
-#: prefs.js:94
+#: prefs.js:93
 msgid "(at your option) any later version."
 msgstr ""
 
-#: prefs.js:95
+#: prefs.js:94
 msgid "This program is distributed in the hope that it will be useful,"
 msgstr ""
 
-#: prefs.js:96
+#: prefs.js:95
 msgid "but WITHOUT ANY WARRANTY; without even the implied warranty of"
 msgstr ""
 
-#: prefs.js:97
+#: prefs.js:96
 msgid "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the"
 msgstr ""
 
-#: prefs.js:98
+#: prefs.js:97
 msgid "GNU General Public License for more details."
 msgstr ""
 
-#: prefs.js:99
+#: prefs.js:98
 msgid "You should have received a copy of the GNU General Public License"
 msgstr ""
 
-#: prefs.js:100
+#: prefs.js:99
 msgid ""
 "along with this program.  If not, see <a href=\"https://www.gnu.org/licenses/"
 "\">https://www.gnu.org/licenses/</a>."
 msgstr ""
 
-#: prefs.js:119
+#: prefs.js:118
 msgid "Preferences"
 msgstr ""
 
-#: prefs.js:125
-msgid "Select dictionaries"
+#: prefs.js:124
+msgid "Viewer options"
 msgstr ""
 
-#: prefs.js:136
+#: prefs.js:127
+msgid "Search options"
+msgstr ""
+
+#: prefs.js:142
 msgid "About"
 msgstr ""
