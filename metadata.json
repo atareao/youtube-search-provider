@@ -5,7 +5,7 @@
     "3.26", 
     "3.28"
   ], 
-  "url": "https://github.com/atareao/youtube-search-provider", 
+  "url": "https://gitlab.gnome.org/atareao/youtube-search-provider.git", 
   "uuid": "youtube-search-provider@atareao.es", 
   "gettext-domain": "youtube-search-provider@atareao.es", 
   "settings-schema": "es.atareao.youtube-search-provider",

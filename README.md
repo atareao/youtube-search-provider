@@ -52,7 +52,7 @@ You can configure some options in order to improve your search,
 
 ### Install
 
-* ```git clone https://github.com/atareao/youtube-search-provider.git ~/.local/share/gnome-shell/extensions/youtube-search-provider@atareao.es```
+* ```git clone https://gitlab.gnome.org/atareao/youtube-search-provider.git ~/.local/share/gnome-shell/extensions/youtube-search-provider@atareao.es```
 * Hit ```<Alt> + F2``` and type ```r``` and hit ```<Enter>```
 * Enable the extension in ```gnome-tweak-tool```
 * Configure languages in  ```gnome-tweak-tool```
