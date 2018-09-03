@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WordReference Search Provider - 1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-19 11:15+0200\n"
+"POT-Creation-Date: 2018-09-03 07:15+0200\n"
 "PO-Revision-Date: 2018-06-02 19:46+0200\n"
 "Last-Translator: Lorenzo <lorenzo.carbonell.cerezo@gmail.com>\n"
 "Language-Team: Spanish\n"
@@ -17,97 +17,97 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: schemas/es.atareao.youtube-search-provider.gschema.xml:64
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:65
 msgid "Order"
 msgstr "Orden"
 
-#: schemas/es.atareao.youtube-search-provider.gschema.xml:65
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:66
 msgid "The method that will be used to order the results"
 msgstr "Como se ordenan los resultados"
 
-#: schemas/es.atareao.youtube-search-provider.gschema.xml:69
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:70
 msgid "Time"
 msgstr "Hora"
 
-#: schemas/es.atareao.youtube-search-provider.gschema.xml:73
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:74
 msgid "Safe search"
 msgstr "Búsqueda segura"
 
-#: schemas/es.atareao.youtube-search-provider.gschema.xml:74
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:75
 msgid ""
 "It indicates whether the search results should include restricted content as "
 "well as standard content"
 msgstr "Permite elegir si se restringen los resultados"
 
-#: schemas/es.atareao.youtube-search-provider.gschema.xml:78
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:79
 msgid "Video caption"
 msgstr "Subtítulos"
 
-#: schemas/es.atareao.youtube-search-provider.gschema.xml:79
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:80
 msgid ""
 "It indicates whether should filter video search results based on whether "
 "they have captions"
 msgstr "Permite elegir los vídeos según los subtítulos"
 
-#: schemas/es.atareao.youtube-search-provider.gschema.xml:83
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:84
 msgid "Video definition"
 msgstr "Defnición"
 
-#: schemas/es.atareao.youtube-search-provider.gschema.xml:84
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:85
 msgid ""
 "It lets you restrict a search to only include either high definition (HD) or "
 "standard definition (SD) videos. HD videos are available for playback in at "
 "least 720p, though higher resolutions, like 1080p, might also be available"
 msgstr "Permite mostrar vídeos según sean en alta definición o normal"
 
-#: schemas/es.atareao.youtube-search-provider.gschema.xml:88
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:89
 msgid "Video dimension"
 msgstr "Dimensión"
 
-#: schemas/es.atareao.youtube-search-provider.gschema.xml:89
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:90
 msgid "It lets you restrict a search to only retrieve 2D or 3D videos"
 msgstr "Permite elegir entre todos los vídeos o los de tres dimensiones"
 
-#: schemas/es.atareao.youtube-search-provider.gschema.xml:93
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:94
 msgid "Video duration"
 msgstr "Duración"
 
-#: schemas/es.atareao.youtube-search-provider.gschema.xml:94
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:95
 msgid "It filters video search results based on their duration"
 msgstr "Filtra los resultados por la duración"
 
-#: schemas/es.atareao.youtube-search-provider.gschema.xml:98
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:99
 msgid "Video license"
 msgstr "Licencia"
 
-#: schemas/es.atareao.youtube-search-provider.gschema.xml:99
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:100
 msgid ""
 "It filters search results to only include videos with a particular license"
 msgstr "Filtra los resultados según la licencia"
 
-#: schemas/es.atareao.youtube-search-provider.gschema.xml:103
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:104
 msgid "Video type"
 msgstr "Tipo"
 
-#: schemas/es.atareao.youtube-search-provider.gschema.xml:104
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:105
 msgid "It lets you restrict a search to a particular type of videos"
 msgstr "Filtra los resultados en función del tipo de vídeo"
 
-#: schemas/es.atareao.youtube-search-provider.gschema.xml:108
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:109
 msgid "Maximum results"
 msgstr "Número de resultados"
 
-#: schemas/es.atareao.youtube-search-provider.gschema.xml:109
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:110
 msgid ""
 "Maximum number of items that should be returned in the result set. "
 "Acceptable values are 0 to 50, inclusive"
 msgstr "Número máximo de resultados. Valor comprendido entre 0 y 50."
 
-#: schemas/es.atareao.youtube-search-provider.gschema.xml:113
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:114
 msgid "YouTube viewer"
 msgstr "Visualizador"
 
-#: schemas/es.atareao.youtube-search-provider.gschema.xml:114
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:115
 msgid "Set YouTube viewer"
 msgstr "Selecciona el visualizador"
 

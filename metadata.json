@@ -9,5 +9,5 @@
   "uuid": "youtube-search-provider@atareao.es", 
   "gettext-domain": "youtube-search-provider@atareao.es", 
   "settings-schema": "es.atareao.youtube-search-provider",
-  "version": 1
+  "version": 2
 }

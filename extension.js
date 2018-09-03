@@ -137,6 +137,11 @@ class YouTubeSearchProvider{
                             command = '/usr/bin/miro "https://www.youtube.com/watch?v=%s"';
                         }
                         break;
+                    case 6:
+                        if(Gio.File.new_for_path('/usr/bin/mpv').query_exists(null)){
+                            command = '/usr/bin/mpv "https://www.youtube.com/watch?v=%s"';
+                        }
+                        break;
                 }
                 if(command == ''){
                     command = 'xdg-open https://www.youtube.com/watch?v=%s';
@@ -183,6 +188,7 @@ class YouTubeSearchProvider{
                                 scale_factor
                             );
                             box.add_child(icon);
+                            box.set_size(meta.thumbnail_width, meta.thumbnail_height);
                             return box;
                         }
                     });

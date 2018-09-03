@@ -57,6 +57,7 @@
         <value value="3" nick="umplayer"/>
         <value value="4" nick="totem"/>
         <value value="5" nick="miro"/>
+        <value value="6" nick="mpv"/>
     </enum>
     <schema path="/es/atareao/youtube-search-provider/" id="es.atareao.youtube-search-provider">
         <key name="order" enum="es.atareao.youtube-search-provider.order">
