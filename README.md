@@ -48,6 +48,17 @@ You can configure some options in order to improve your search,
     * **episode**. Only retrieve episodes of shows.
     * **movie**. Only retrieve movies.
 
+You can configure the player. Now these are the available players,
+
+* **vlc**
+* **minitube**
+* **smplayer**
+* **umplayer**
+* **totem**
+* **miro**
+* **mpv**
+
+
 ## HOWTO
 
 ### Install
