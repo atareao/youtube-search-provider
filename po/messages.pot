@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-03 07:15+0200\n"
+"POT-Creation-Date: 2020-08-22 14:24+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -111,27 +111,31 @@ msgstr ""
 msgid "Set YouTube viewer"
 msgstr ""
 
-#: extension.js:63 extension.js:70
+#: extension.js:62 extension.js:69 extension.js:75
 msgid "YouTube"
 msgstr ""
 
-#: extension.js:64
+#: extension.js:63
 msgid "Loading items from YouTube, please wait..."
 msgstr ""
 
-#: extension.js:71
+#: extension.js:70
 msgid "Oops, an error occurred while searching."
 msgstr ""
 
-#: preferenceswidget.js:168
+#: extension.js:76
+msgid "Oops, I did'nt found what you are looking for."
+msgstr ""
+
+#: preferenceswidget.js:216
 msgid "Nothing"
 msgstr ""
 
-#: preferenceswidget.js:181
+#: preferenceswidget.js:229
 msgid "True"
 msgstr ""
 
-#: preferenceswidget.js:194
+#: preferenceswidget.js:242
 msgid "False"
 msgstr ""
 
@@ -152,59 +156,53 @@ msgid "Copyright © 2018 Lorenzo Carbonell"
 msgstr ""
 
 #: prefs.js:90
-msgid "This program is free software: you can redistribute it and/or modify"
+msgid ""
+"THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS "
+"OR\n"
 msgstr ""
 
 #: prefs.js:91
-msgid "it under the terms of the GNU General Public License as published by"
+msgid ""
+"IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n"
 msgstr ""
 
 #: prefs.js:92
-msgid "the Free Software Foundation, either version 3 of the License, or"
+msgid ""
+"FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n"
 msgstr ""
 
 #: prefs.js:93
-msgid "(at your option) any later version."
+msgid ""
+"AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n"
 msgstr ""
 
 #: prefs.js:94
-msgid "This program is distributed in the hope that it will be useful,"
+msgid ""
+"LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING\n"
 msgstr ""
 
 #: prefs.js:95
-msgid "but WITHOUT ANY WARRANTY; without even the implied warranty of"
+msgid ""
+"FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER "
+"DEALINGS\n"
 msgstr ""
 
 #: prefs.js:96
-msgid "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the"
+msgid "IN THE SOFTWARE.\n"
 msgstr ""
 
-#: prefs.js:97
-msgid "GNU General Public License for more details."
-msgstr ""
-
-#: prefs.js:98
-msgid "You should have received a copy of the GNU General Public License"
-msgstr ""
-
-#: prefs.js:99
-msgid ""
-"along with this program.  If not, see <a href=\"https://www.gnu.org/licenses/"
-"\">https://www.gnu.org/licenses/</a>."
-msgstr ""
-
-#: prefs.js:118
+#: prefs.js:116
 msgid "Preferences"
 msgstr ""
 
-#: prefs.js:124
+#: prefs.js:122
 msgid "Viewer options"
 msgstr ""
 
-#: prefs.js:127
+#: prefs.js:125
 msgid "Search options"
 msgstr ""
 
-#: prefs.js:142
+#: prefs.js:140
 msgid "About"
 msgstr ""
