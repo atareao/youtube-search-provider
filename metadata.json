@@ -2,12 +2,11 @@
   "description": "With YouTube Search Provider you can search youtube videos\ndirectly from GNOME Shell.", 
   "name": "YouTube Search Provider", 
   "shell-version": [
-    "3.26", 
-    "3.28"
+    "3.36"
   ], 
   "url": "https://gitlab.gnome.org/atareao/youtube-search-provider.git", 
   "uuid": "youtube-search-provider@atareao.es", 
   "gettext-domain": "youtube-search-provider@atareao.es", 
   "settings-schema": "es.atareao.youtube-search-provider",
-  "version": 2
+  "version": 3
 }
