@@ -55,7 +55,6 @@ let ColorSetting = GObject.registerClass(
 
             this.drawingArea = new Gtk.DrawingArea();
             this.drawingArea.connect('draw', (widget, cr)=>{
-                log('DDDD'+this.background_color.green);
                 cr.setSourceRGBA(this.background_color.red,
                                  this.background_color.green,
                                  this.background_color.blue,
@@ -315,7 +314,6 @@ let NumberSetting = GObject.registerClass(
                 upper: upper,
                 step_increment: 1
             });
-            log('disk-space-usage: adjustment');
 
             settings.bind(
                 keyName,
@@ -323,7 +321,6 @@ let NumberSetting = GObject.registerClass(
                 "value",
                 Gio.SettingsBindFlags.DEFAULT
             );
-            log('disk-space-usage: binding');
         }
     }
 );
@@ -600,7 +597,6 @@ let Section = GObject.registerClass(
          * @return {Gtk.ListBoxRow} row - The new row
          */
         addSetting(summary, description, widget) {
-            log('disk-space-usage: addSetting');
             let setting = new Setting(summary, description, widget);
             let row = this.addRow(setting);
             return row;
@@ -622,8 +618,6 @@ let Section = GObject.registerClass(
             let type = key.get_value_type().dup_string();
             type = (range !== "type") ? range : type;
 
-            log('disk-space-usage: Aqui');
-            log('disk-space-usage: ' + type);
             if (widget !== undefined) {
                 widget = new widget(settings, keyName);
             } else if (type === "b") {
@@ -635,7 +629,6 @@ let Section = GObject.registerClass(
             } else if (type === "mb") {
                 widget = new MaybeSetting(settings, keyName);
             } else if (type.length === 1 && "ynqiuxthd".indexOf(type) > -1) {
-                log('disk-space-usage: integer');
                 widget = new NumberSetting(settings, keyName, type);
             } else if (type === "range") {
                 widget = new RangeSetting(settings, keyName);

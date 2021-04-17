@@ -32,6 +32,7 @@ const PROTOCOL = 'https';
 const BASE_URL = 'www.googleapis.com/youtube/v3/search';
 const USER_AGENT = 'GNOME Shell - YouTubeSearchProvider - extension';
 const HTTP_TIMEOUT = 10;
+const API_KEY = 'AIzaSyDNvDT9CeH-KETzgVQQJtK0onf6sV3r-qU';
 
 const ORDER = { //order
     0: "date", // Entries are ordered by their relevance to a search query. This is the default setting for video search results feeds.
@@ -87,6 +88,7 @@ class YouTubeClient{
     constructor(params){
         this._protocol = PROTOCOL;
         this._base_url = BASE_URL;
+        this._apikey = API_KEY;
         this._settings = Convenience.getSettings();
         this._order = ORDER[this._settings.get_enum('order')];
         this._time = TIME[this._settings.get_enum('time')];
@@ -98,6 +100,11 @@ class YouTubeClient{
         this._videolicense = VIDEOLICENSE[this._settings.get_enum('videolicense')]
         this._videotype = VIDEOTYPE[this._settings.get_enum('videotype')]
         this._max_results = this._settings.get_int('max-results');
+        if(this._settings.get_string('apikey')){
+            this._apikey = this._settings.get_string('apikey');
+        }else{
+            this._apikey = API_KEY;
+        }
         this._settings.connect("changed", ()=>{
             this._order = ORDER[this._settings.get_enum('order')];
             this._time = TIME[this._settings.get_enum('time')];
@@ -109,6 +116,11 @@ class YouTubeClient{
             this._videolicense = VIDEOLICENSE[this._settings.get_enum('videolicense')]
             this._videotype = VIDEOTYPE[this._settings.get_enum('videotype')]
             this._max_results = this._settings.get_int('max-results');
+            if(this._settings.get_string('apikey')){
+                this._apikey = this._settings.get_string('apikey');
+            }else{
+                this._apikey = API_KEY;
+            }
         });
     }
 
@@ -152,7 +164,7 @@ class YouTubeClient{
     _build_query_url(word){
         // 0 < maxResults < 50
         // encodeURIComponent(word),
-        let url = '%s://%s?part=snippet&q=%s&order=%s&maxResults=%s&type=video&safeSearch=%s&videoCaption=%s&videoDefinition=%s&videoDimension=%s&videoDuration=%s&videoLicense=%s&videoType=%s%s&key=AIzaSyD04-CwHJn6llyGRmUfL3MwVxFjnzeektM'.format(
+        let url = '%s://%s?part=snippet&q=%s&order=%s&maxResults=%s&type=video&safeSearch=%s&videoCaption=%s&videoDefinition=%s&videoDimension=%s&videoDuration=%s&videoLicense=%s&videoType=%s&key=%s'.format(
             this._protocol,
             this._base_url,
             encodeURIComponent(word),
@@ -165,25 +177,27 @@ class YouTubeClient{
             this._videoduration,
             this._videolicense,
             this._videotype,
-            this.calculate_time(this._time)
+            //this.calculate_time(this._time),
+            this._apikey
         );
         return url;
     }
 
     get(word, callback, p1, p2) {
-        log('LLL 1: '+ word);
         let query_url = this._build_query_url(word);
-        log('LLL 2: '+ query_url);
         let request = Soup.Message.new('GET', query_url);
 
         _get_soup_session().queue_message(request,
             (http_session, message) => {
                 if(message.status_code !== Soup.KnownStatusCode.OK) {
-                    let error_message =
-                        "YouTubeClient.Client:get(): Error code: %s".format(
-                            message.status_code
-                        );
-                    callback(error_message, null);
+                    let error_message = "";
+                    if(request && request.response_body && request.response_body.data){
+                        let result = JSON.parse(request.response_body.data);
+                        error_message = "Error code: %s. %s".format(result.error.code, result.error.message);
+                    }else{
+                        error_message = "Error code: %s".format(message.status_code);
+                    }
+                    callback(error_message, null, p1, p2);
                     return;
                 }else{
                     try {
@@ -191,7 +205,6 @@ class YouTubeClient{
                         let results = [];
                         let i = 0;
                         result.items.forEach((element)=>{
-                            log('Index: ' + i + ' Name: ' + element.snippet.title);
                             results.push({
                                 id: 'index_'+i,
                                 label: element.snippet.title,
@@ -209,7 +222,7 @@ class YouTubeClient{
                         }
                     }
                     catch(e) {
-                        let message = "WordReference.Client:get(): %s".format(e);
+                        let message = "YouTubeSearchProvider.Client:get(): %s".format(e);
                         callback(message, null, p1, p2);
                         return;
                     }

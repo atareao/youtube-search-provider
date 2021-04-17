@@ -54,7 +54,7 @@ class YouTubeSearchProvider{
         this.appInfo.get_icon = ()=>{
             return Gio.icon_new_for_string(Extension.path + '/icons/youtube.svg');
         };
-
+        this._message = "";
         // Custom messages that will be shown as search results
         this._messages = {
             '__loading__': {
@@ -70,6 +70,12 @@ class YouTubeSearchProvider{
                 description : _('Oops, an error occurred while searching.'),
                 createIcon: () => {}
             },
+            '__error2__': {
+                id: '__error__',
+                name: _('YouTube'),
+                description : this._message,
+                createIcon: () => {}
+            },
             '__nothing_found__': {
                 id: '__nothing_found__',
                 name: _('YouTube'),
@@ -83,8 +89,12 @@ class YouTubeSearchProvider{
         this._api = new YouTubeClient.YouTubeClient();
         // Wait before making an API request
         this._timeoutId = 0;
-
-
+        this._keyReleaseId = Main.overview.searchEntry.clutter_text.connect(
+            "key-release_event", (object, event)=>{
+                let symbol = event.get_key_symbol();
+                let query = Main.overview.searchEntry.text;
+            }
+        )
     }
 
     /**
@@ -173,25 +183,22 @@ class YouTubeSearchProvider{
                 // TODO: check for messages that don't exist, show generic error message
                 let meta = this.resultsMap.get(identifiers[i]);
                 if (meta){
-                    log("Id: " + meta.id + " Name: "+ meta.label);
-                    log("Url: " + meta.thumbnail_url);
-                    log("widht: " + meta.thumbnail_width);
-                    log("height: " + meta.thumbnail_height);
                     metas.push({
                         id: meta.id,
                         name: meta.label,
                         description : meta.description,
                         createIcon: (size)=>{
-                            log('box')
                             let box = new Clutter.Box();
-                            let gicon = Gio.icon_new_for_string(meta.thumbnail_url);
-                            if(!gicon){
-                                gicon = Gio.icon_new_for_string(Extension.path + '/icons/youtube.svg');
+                            if(meta && meta.thumbnail_url){
+                                let gicon = Gio.icon_new_for_string(meta.thumbnail_url);
+                                if(!gicon){
+                                    gicon = Gio.icon_new_for_string(Extension.path + '/icons/youtube.svg');
+                                }
+                                let icon = new St.Icon({gicon: gicon,
+                                                        style_class: 'youtube-icon'});
+                                icon.set_icon_size(100);
+                                box.add_child(icon);
                             }
-                            let icon = new St.Icon({gicon: gicon,
-                                                    style_class: 'youtube-icon'});
-                            icon.set_icon_size(150);
-                            box.add_child(icon);
                             return box;
                         }
                     });
@@ -202,18 +209,15 @@ class YouTubeSearchProvider{
     }
 
     /**
-     * Search API if the query is a Wikidata query.
-     * Wikidata query must start with a 'wd' as the first term.
+     * Search API if the query is a YouTube query.
+     * YouTube query must start with a 'y:' as the first term.
      * @param {Array} terms
      * @param {Function} callback
      * @param {Gio.Cancellable} cancellable
      */
     getInitialResultSet(terms, callback, cancellable) {
         // terms holds array of search items
-        // The first term must start with a 'wd' (=wikidata).
-        // It can be of the form 'wd', 'wd-en', 'wd-ru'. The part after
-        // the dash is the search language.
-
+        // The first term must start with a 'y:'
         if (terms != null && terms.length > 0 && terms[0].substring(0, 2) === 'y:') {
             // show the loading message
             this.showMessage('__loading__', callback);
@@ -256,7 +260,7 @@ class YouTubeSearchProvider{
      * @returns {Array}
      */
     getSubsearchResultSet(previousResults, terms, callback, cancellable) {
-        //this.getInitialResultSet(terms, callback);
+        this.getInitialResultSet(terms, callback);
     }
 
     /**
@@ -267,8 +271,11 @@ class YouTubeSearchProvider{
      */
     filterResults(results, max) {
         // override max for now
-        max = this._api.limit;
-        return results.slice(0, max);
+        if(this._apit && this._api.limit){
+            max = this._api.limit;
+            results = results.slice(0, max);
+        }
+        return results;
     }
 
     /**
@@ -289,22 +296,10 @@ class YouTubeSearchProvider{
      * @private
      */
     _getResultSet(error, result, callback, timeoutId) {
-        log("Error");
-        log(error);
-        log("Result: ");
-        log(result);
-        log("Callback: ");
-        log(callback);
-        log("timeoutId: ");
-        log(timeoutId);
-        log('FFFF: 01');
         let results = [];
         if (timeoutId === this._timeoutId && result && result.length > 0) {
-            log('FFFF: 02');
             if(result.length > 0){
-                log('FFFF: 03');
                 result.forEach((aresult) => {
-                    log('FFFF: 04');
                     this.resultsMap.set(aresult.id, aresult);
                     results.push(aresult.id);
                 });
@@ -314,7 +309,15 @@ class YouTubeSearchProvider{
             }
         } else if (error) {
             // Let the user know that an error has occurred.
-            this.showMessage('__error__', callback);
+            this.resultsMap = new Map();
+            let message_error = {
+                id: GLib.base64_encode(error),
+                label: _('YouTube'),
+                description : error
+            };
+            this.resultsMap.set(message_error.id, message_error);
+            results.push(message_error.id);
+            callback(results);
         }
     }
 
@@ -329,6 +332,12 @@ class YouTubeSearchProvider{
                                 icon_size: size});
         box.add_child(icon);
         return box;
+    }
+    unregister(){
+        if (this._timeoutId > 0) {
+            GLib.source_remove(this._timeoutId);
+            this._timeoutId = 0;
+        }
     }
 }
 
@@ -349,6 +358,7 @@ function enable() {
 
 function disable() {
     if (youTubeSearchProvider){
+        youTubeSearchProvider.unregister();
         Main.overview.viewSelector._searchResults._unregisterProvider(
             youTubeSearchProvider
         );

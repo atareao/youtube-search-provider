@@ -114,5 +114,10 @@
             <summary>YouTube viewer</summary>
             <description>Set YouTube viewer</description>
         </key>
+        <key name="apikey" type="s">
+            <default>""</default>
+            <summary>YouTube API key</summary>
+            <description>Set YouTube API key</description>
+        </key>
     </schema>
 </schemalist>

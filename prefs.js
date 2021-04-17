@@ -133,6 +133,7 @@ var YouTubeSearchProviderPreferencesWidget = GObject.registerClass(
             appearanceSection.addGSetting(settings, "videolicense");
             appearanceSection.addGSetting(settings, "videotype");
             appearanceSection.addGSetting(settings, "max-results");
+            appearanceSection.addGSetting(settings, "apikey");
 
             // About Page
             let aboutPage = this.addPage(
@@ -150,9 +151,6 @@ function buildPrefsWidget() {
     GLib.timeout_add(GLib.PRIORITY_DEFAULT, 0, () => {
         let prefsWindow = wrsp.get_toplevel()
         prefsWindow.get_titlebar().custom_title = wrsp.switcher;
-        prefsWindow.connect("destroy", () => {
-            wrsp.daemon.discovering = false;
-        });
         return false;
     });
 
