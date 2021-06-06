@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WordReference Search Provider - 1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-22 14:23+0200\n"
+"POT-Creation-Date: 2021-06-06 20:58+0200\n"
 "PO-Revision-Date: 2018-06-02 19:46+0200\n"
 "Last-Translator: Lorenzo <lorenzo.carbonell.cerezo@gmail.com>\n"
 "Language-Team: Spanish\n"
@@ -111,31 +111,42 @@ msgstr "Visualizador"
 msgid "Set YouTube viewer"
 msgstr "Selecciona el visualizador"
 
-#: extension.js:62 extension.js:69 extension.js:75
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:119
+#, fuzzy
+msgid "YouTube API key"
+msgstr "YouTube"
+
+#: schemas/es.atareao.youtube-search-provider.gschema.xml:120
+#, fuzzy
+msgid "Set YouTube API key"
+msgstr "Selecciona el visualizador"
+
+#: extension.js:69 extension.js:76 extension.js:82 extension.js:88
+#: extension.js:322
 msgid "YouTube"
 msgstr "YouTube"
 
-#: extension.js:63
+#: extension.js:70
 msgid "Loading items from YouTube, please wait..."
 msgstr "Cargando vídeos de YouTube, por favor espera..."
 
-#: extension.js:70
+#: extension.js:77
 msgid "Oops, an error occurred while searching."
 msgstr "Ups!, ha ocurrido un error mientras buscaba..."
 
-#: extension.js:76
+#: extension.js:89
 msgid "Oops, I did'nt found what you are looking for."
 msgstr ""
 
-#: preferenceswidget.js:216
+#: preferenceswidget.js:215
 msgid "Nothing"
 msgstr "Nada"
 
-#: preferenceswidget.js:229
+#: preferenceswidget.js:228
 msgid "True"
 msgstr "Cierto"
 
-#: preferenceswidget.js:242
+#: preferenceswidget.js:241
 msgid "False"
 msgstr "Falso"
 
@@ -191,19 +202,19 @@ msgstr ""
 msgid "IN THE SOFTWARE.\n"
 msgstr ""
 
-#: prefs.js:116
+#: prefs.js:123
 msgid "Preferences"
 msgstr "Preferencias"
 
-#: prefs.js:122
+#: prefs.js:129
 msgid "Viewer options"
 msgstr "Opciones de visualizador"
 
-#: prefs.js:125
+#: prefs.js:132
 msgid "Search options"
 msgstr "Opciones de búsqueda"
 
-#: prefs.js:140
+#: prefs.js:148
 msgid "About"
 msgstr "Acerca de..."
 
